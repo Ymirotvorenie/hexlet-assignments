@@ -3,10 +3,13 @@ package exercise;
 import java.util.HashMap;
 import java.util.Map;
 
-import static exercise.Utils.*;
+import static exercise.Utils.readFile;
+import static exercise.Utils.serialize;
+import static exercise.Utils.unserialize;
+import static exercise.Utils.writeFile;
 
 // BEGIN
-public class FileKV implements KeyValueStorage{
+public class FileKV implements KeyValueStorage {
     String path;
 
     public FileKV(String path, Map<String, String> data) {
