@@ -38,6 +38,7 @@ public final class App {
                     .findFirst()
                     .orElseThrow(() -> new NotFoundResponse("User not found"));
             var page = new UserPage(user);
+
             ctx.render("users/show.jte", model("page", page));
         });
         // END

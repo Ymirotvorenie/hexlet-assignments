@@ -45,24 +45,6 @@
             @endif
             </tbody>
         </table>
-        <script>
-            function idSorter(a, b) {
-              var aa = a.replace('$', '')
-              var bb = b.replace('$', '')
-              return aa - bb
-            }
-        </script>
-<%--        @if(page.getUsers().isEmpty())--%>
-<%--            <p>There are no users</p>--%>
-<%--        @else--%>
-<%--            @for(var user : page.getUsers())--%>
-<%--                <div>--%>
-<%--                    <h2><a href="/users/${user.getId()}">${String.format("User id: %s\nFirst name: %s\nLast name: %s\n",--%>
-<%--                        user.getId(), user.getFirstName(), user.getLastName())}</a></h2>--%>
-
-<%--                </div>--%>
-<%--            @endfor--%>
-<%--        @endif--%>
     </main>
 </div>
 </body>
