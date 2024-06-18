@@ -1,6 +1,8 @@
 package exercise;
 
 import io.javalin.Javalin;
+
+import java.util.Comparator;
 import java.util.List;
 import io.javalin.http.NotFoundResponse;
 import exercise.model.User;
@@ -23,8 +25,10 @@ public final class App {
 
         // BEGIN
         app.get("/users", ctx -> {
-            var page = new UsersPage(USERS);
-            ctx.render("users/index.jte", model ("page", page));
+            var page = new UsersPage(USERS.stream()
+                    .sorted(Comparator.comparing(User::getId))
+                    .toList());
+            ctx.render("users/index.jte", model("page", page));
         });
 
         app.get("/users/{id}", ctx -> {
