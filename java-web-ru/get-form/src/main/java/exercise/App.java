@@ -35,7 +35,7 @@ public final class App {
 
 
             } else {
-                users = new ArrayList<>();
+                users = new ArrayList<>(USERS);
             }
             var page = new UsersPage(users, term);
             ctx.render("users/index.jte", model("page", page));
