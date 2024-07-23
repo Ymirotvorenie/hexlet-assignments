@@ -23,10 +23,14 @@ public class ProductsController {
 
     // BEGIN
     @GetMapping
-    public List<Product> index(@RequestParam(required = false) Integer min,
-                               @RequestParam(required = false) Integer max) {
-        min = min != null ? min : 0;
-        max = max != null ? max : 999999;
+//    public List<Product> index(@RequestParam(required = false) Integer min,
+//                               @RequestParam(required = false) Integer max) {
+//        min = min != null ? min : 0;
+//        max = max != null ? max : 999999;
+//        return productRepository.findByPriceBetweenOrderByPrice(min, max);
+//    }
+    public List<Product> index(@RequestParam(defaultValue = Integer.MIN_VALUE + "") Integer min,
+                               @RequestParam(defaultValue = Integer.MAX_VALUE + "") Integer max) {
         return productRepository.findByPriceBetweenOrderByPrice(min, max);
     }
     // END
