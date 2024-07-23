@@ -84,23 +84,29 @@ class ApplicationTest {
                 .andReturn();
         var body = result.getResponse().getContentAsString();
         assertThatJson(body).isPresent();
+
+        assertThatJson(body).and(
+                v -> v.node("title").isEqualTo(task.getTitle()),
+                v -> v.node("description").isEqualTo(task.getDescription())
+        );
     }
 
     @Test
     public void testCreate() throws Exception {
-        var task = testTask();
-
-        var data = new HashMap<>();
-        data.put("title", task.getTitle());
-        data.put("description", task.getDescription());
+        var data = testTask();
 
         var request = post("/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(om.writeValueAsString(data));
 
-        var result = mockMvc.perform(request).andExpect(status().isCreated());
+        var result = mockMvc.perform(request)
+                .andExpect(status().isCreated());
 
-        assertTrue(taskRepository.findByTitle(task.getTitle()).isPresent());
+        var task = taskRepository.findByTitle(data.getTitle()).get();
+
+        assertThat(task).isNotNull();
+        assertThat(task.getTitle()).isEqualTo(data.getTitle());
+        assertThat(task.getDescription()).isEqualTo(data.getDescription());
     }
 
     @Test
